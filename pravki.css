@@ -1,0 +1,62 @@
+/* Доработки демо ателье (приёмы из копилки). Подключается после стилей каркаса. */
+
+/* Значок «демо» в шапке – пока владелец не одобрил сайт */
+.demo-badge { margin-left: .7em; padding: .28em .6em .3em; border-radius: 99px; border: 1px solid color-mix(in oklab, currentColor 55%, transparent);
+  color: inherit; font-family: var(--v-font-text); font-size: .62rem; font-weight: 700; letter-spacing: .12em;
+  text-transform: uppercase; line-height: 1; opacity: .85; }
+
+/* Телефон: длинное название ателье переносится, кнопка в шапке остаётся на экране */
+@media (max-width: 600px) {
+  .bar { gap: var(--v-3); }
+  .bar__mark { display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: .5em; row-gap: .25em; align-items: center;
+    white-space: normal; line-height: 1.1; font-size: 1rem; min-width: 0; flex: 1 1 auto; }
+  .bar__mark i { grid-row: 1 / span 2; }
+  .bar__mark .bar__name { min-width: 0; }
+  .bar__mark .demo-badge { grid-column: 2; justify-self: start; margin-left: 0; padding: .2em .45em; font-size: .52rem; }
+  .bar .v-btn { flex: none; padding-inline: .9em; font-size: .9rem; }
+}
+
+/* Заголовки: не рвать по слогам, строки ровнее */
+h1, h2 { hyphens: manual; -webkit-hyphens: manual; text-wrap: balance; }
+
+/* Рейтинг со ссылкой на Карты – один раз на первом экране (на тёмном фото) */
+.hero__rating { display: inline-flex; align-items: center; flex-wrap: wrap; gap: .35em .6em; margin-top: var(--v-5);
+  color: var(--hero-ink); font-size: var(--v-t-sm); text-decoration: none; min-height: 44px; }
+.hero__rating b { font-weight: 700; }
+.hero__rating span:last-child { color: var(--hero-soft); text-decoration: underline; text-underline-offset: .2em; }
+.hero__rating:hover span:last-child { color: var(--hero-ink); }
+.hero__rating .reviews__stars { color: var(--hero-accent); }
+@media (max-width: 860px) { .hero__rating { margin-top: var(--v-3); } }
+
+/* «Так пишут в отзыве» под обещаниями */
+.from-review { display: block; margin-top: .35em; color: var(--v-accent); font-size: .85em; font-weight: 400; }
+
+/* Прайс: пустой срок не рисуем рамкой-штампом */
+.plist .time:empty { display: none; }
+
+/* Фото владельца в блоке цен – подпись внизу на затемнении, а не поверх пёстрой середины */
+.prices__fig.is-own figcaption { top: auto; bottom: 0; left: 0; right: 0; max-width: none; padding: var(--v-6) var(--v-4) var(--v-3);
+  background: linear-gradient(to top, rgb(20 19 26 / .85), transparent); }
+
+/* SMS рядом с телефоном в финале */
+.close__cta .v-btn--ghost { margin-left: 0; }
+
+/* Варианты цвета кнопками – для показа владельцу, после выбора панель убрать */
+.demo-pal { position: fixed; z-index: 40; left: max(12px, env(safe-area-inset-left)); bottom: max(12px, env(safe-area-inset-bottom));
+  display: flex; align-items: center; gap: .4rem; padding: .35rem .45rem .35rem .8rem; border-radius: 99px;
+  background: color-mix(in oklab, var(--v-canvas) 88%, transparent); border: 1px solid var(--v-hair);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); box-shadow: 0 8px 24px rgb(0 0 0 / .25);
+  font-family: var(--v-font-text); font-size: .75rem; color: var(--v-ink-soft); }
+.demo-pal button { display: inline-flex; align-items: center; gap: .4em; min-height: 32px; padding: 0 .7em 0 .35em; border-radius: 99px;
+  border: 1px solid transparent; background: none; color: var(--v-ink); font: inherit; cursor: pointer; }
+.demo-pal button i { width: 20px; height: 20px; border-radius: 50%; background: var(--bg);
+  box-shadow: inset 0 0 0 6px var(--bg), inset 0 0 0 20px var(--sw); border: 1px solid rgb(0 0 0 / .2); }
+.demo-pal button[aria-pressed="true"] { border-color: var(--v-accent); }
+.demo-pal button:focus-visible { outline: 2px solid var(--v-accent); outline-offset: 2px; }
+@media (max-width: 600px) {
+  .demo-pal { transition: opacity .25s, transform .25s; font-size: .7rem; padding-left: .6rem; gap: .2rem; }
+  .demo-pal.is-away { opacity: 0; transform: translateY(12px); pointer-events: none; }
+  .demo-pal button { padding: 0 .3em; min-width: 36px; min-height: 36px; justify-content: center; }
+  .demo-pal button span { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { .demo-pal { transition: none; } }
